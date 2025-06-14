@@ -21,6 +21,7 @@
   --color-info: rgba(98, 108, 113, 1);
   --color-focus-ring: rgba(33, 128, 141, 0.4);
   --color-select-caret: rgba(19, 52, 59, 0.8);
+  --color-white: rgba(255, 255, 255, 1);
 
   /* Common style patterns */
   --focus-ring: 0 0 0 3px var(--color-focus-ring);
@@ -685,7 +686,7 @@ select.form-control {
 }
 
 .logo h2 {
-  color: var(--color-primary);
+  color: var(--color-white);
   font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-bold);
 }
