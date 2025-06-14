@@ -744,15 +744,35 @@ select.form-control {
   -webkit-text-fill-color: transparent;
   font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-bold);
-  text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+  text-shadow: 0 0 30px rgba(255, 215, 0, 0.6),
+               0 0 60px rgba(255, 215, 0, 0.4),
+               0 0 90px rgba(255, 215, 0, 0.2);
+  animation: headerGlow 2s ease-in-out infinite;
 }
 
 .location {
   font-size: var(--font-size-sm);
-  color: #FFD700;
+  background: linear-gradient(to right, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   display: block;
   margin-top: -var(--space-4);
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.5),
+               0 0 40px rgba(255, 215, 0, 0.3);
+}
+
+@keyframes headerGlow {
+  0%, 100% {
+    text-shadow: 0 0 30px rgba(255, 215, 0, 0.6),
+                 0 0 60px rgba(255, 215, 0, 0.4),
+                 0 0 90px rgba(255, 215, 0, 0.2);
+  }
+  50% {
+    text-shadow: 0 0 40px rgba(255, 215, 0, 0.7),
+                 0 0 80px rgba(255, 215, 0, 0.5),
+                 0 0 120px rgba(255, 215, 0, 0.3);
+  }
 }
 
 .nav-menu {
@@ -762,12 +782,16 @@ select.form-control {
 }
 
 .nav-link {
-  color: rgba(255, 255, 255, 0.8);
+  background: linear-gradient(to right, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   font-family: 'SF Pro Display', sans-serif;
   font-weight: 500;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   padding: 8px 0;
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
 }
 
 .nav-link::after {
@@ -777,12 +801,14 @@ select.form-control {
   left: 0;
   width: 0;
   height: 2px;
-  background: #fff;
+  background: linear-gradient(to right, #FFD700, #FFA500);
   transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
 
 .nav-link:hover {
-  color: #fff;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.5),
+               0 0 40px rgba(255, 215, 0, 0.3);
 }
 
 .nav-link:hover::after {
@@ -885,7 +911,9 @@ select.form-control {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+  text-shadow: 0 0 40px rgba(255, 215, 0, 0.6),
+               0 0 80px rgba(255, 215, 0, 0.4),
+               0 0 120px rgba(255, 215, 0, 0.2);
   opacity: 0;
   transform: translateY(20px);
   animation: fadeInUp 1s ease-out forwards, glowPulse 2s ease-in-out infinite;
@@ -1055,8 +1083,12 @@ select.form-control {
 
 .stat-item h3 {
   font-size: var(--font-size-3xl);
-  color: var(--color-primary);
+  background: linear-gradient(to right, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: var(--space-8);
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
 }
 
 .stat-item p {
@@ -1094,9 +1126,14 @@ select.form-control {
 }
 
 .course-title {
-  color: var(--color-primary);
+  background: linear-gradient(to right, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: var(--space-12);
   font-size: var(--font-size-xl);
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+  font-family: 'SF Pro Display', sans-serif;
 }
 
 .course-duration {
@@ -1196,8 +1233,13 @@ select.form-control {
 }
 
 .service-card h3 {
-  color: var(--color-primary);
+  background: linear-gradient(to right, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: var(--space-16);
+  font-family: 'SF Pro Display', sans-serif;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
 }
 
 .service-card ul {
@@ -1216,8 +1258,12 @@ select.form-control {
   content: '•';
   position: absolute;
   left: 0;
-  color: var(--color-primary);
+  background: linear-gradient(to right, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   font-weight: var(--font-weight-bold);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
 
 /* Contact Section */
@@ -1277,7 +1323,12 @@ select.form-control {
 
 .contact-item h4 {
   margin-bottom: var(--space-8);
-  color: var(--color-primary);
+  background: linear-gradient(to right, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'SF Pro Display', sans-serif;
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
 }
 
 .contact-item p {
