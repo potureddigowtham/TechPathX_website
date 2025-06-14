@@ -1,2 +1,6 @@
 sudo systemctl enable techpathx
 sudo systemctl start techpathx
+
+
+sudo systemctl restart techpathx
+sudo systemctl status techpathx
