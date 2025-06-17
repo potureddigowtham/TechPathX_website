@@ -1,6 +1,12 @@
 
+@import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600;700&display=swap');
+
 :root {
   /* Colors */
+  --glow-color: rgba(255, 255, 255, 0.8);
+  --hero-gradient-start: #000000;
+  --hero-gradient-end: #1a1a1a;
+  --accent-glow: rgba(147, 197, 253, 0.3);
   --color-background: rgba(252, 252, 249, 1);
   --color-surface: rgba(255, 255, 253, 1);
   --color-text: rgba(19, 52, 59, 1);
@@ -221,7 +227,7 @@ html {
   font-family: var(--font-family-base);
   line-height: var(--line-height-normal);
   color: var(--color-text);
-  background-color: var(--color-background);
+  background: #000000;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
 }
@@ -330,29 +336,48 @@ pre code {
   box-shadow: var(--focus-ring);
 }
 
+.hero .btn {
+  opacity: 0;
+  transform: translateY(20px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
 .hero .btn--primary {
-  background: #E67E22;
-  color: white;
+  background: rgba(255, 255, 255, 0.9);
+  color: #000;
   border: none;
-  transition: background-color 0.3s ease;
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 600;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: fadeInUp 1s ease-out 0.6s forwards;
 }
 
 .hero .btn--primary:hover {
-  background: #D35400;
-}
-
-.hero .btn--primary:active {
-  background: #A04000;
+  background: #fff;
+  transform: scale(1.05);
 }
 
 .hero .btn--outline {
-  background: transparent;
-  color: white;
-  border: 2px solid white;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 500;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: fadeInUp 1s ease-out 0.8s forwards;
 }
 
 .hero .btn--outline:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: scale(1.05);
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
 }
 
 .btn--secondary {
@@ -465,16 +490,42 @@ select.form-control {
 
 /* Card component */
 .card {
-  background-color: var(--color-surface);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-radius: var(--radius-lg);
-  border: 1px solid var(--color-card-border);
-  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(255, 215, 0, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  transition: box-shadow var(--duration-normal) var(--ease-standard);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
 }
 
 .card:hover {
-  box-shadow: var(--shadow-md);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px 0 rgba(255, 215, 0, 0.1);
+  border-color: rgba(255, 215, 0, 0.3);
+}
+
+.card__body {
+  color: #ffffff;
+}
+
+.course-title, .service-card h3 {
+  color: #FFD700;
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
 
 .card__body {
@@ -671,14 +722,15 @@ select.form-control {
 
 /* Header Styles */
 .header {
-  background-color: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  box-shadow: var(--shadow-sm);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .nav {
@@ -686,16 +738,41 @@ select.form-control {
 }
 
 .logo h2 {
-  color: var(--color-white);
+  background: linear-gradient(to right, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-bold);
+  text-shadow: 0 0 30px rgba(255, 215, 0, 0.6),
+               0 0 60px rgba(255, 215, 0, 0.4),
+               0 0 90px rgba(255, 215, 0, 0.2);
+  animation: headerGlow 2s ease-in-out infinite;
 }
 
 .location {
   font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
+  background: linear-gradient(to right, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   display: block;
   margin-top: -var(--space-4);
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.5),
+               0 0 40px rgba(255, 215, 0, 0.3);
+}
+
+@keyframes headerGlow {
+  0%, 100% {
+    text-shadow: 0 0 30px rgba(255, 215, 0, 0.6),
+                 0 0 60px rgba(255, 215, 0, 0.4),
+                 0 0 90px rgba(255, 215, 0, 0.2);
+  }
+  50% {
+    text-shadow: 0 0 40px rgba(255, 215, 0, 0.7),
+                 0 0 80px rgba(255, 215, 0, 0.5),
+                 0 0 120px rgba(255, 215, 0, 0.3);
+  }
 }
 
 .nav-menu {
@@ -705,13 +782,37 @@ select.form-control {
 }
 
 .nav-link {
-  color: var(--color-text);
-  font-weight: var(--font-weight-medium);
-  transition: color var(--duration-fast) var(--ease-standard);
+  background: linear-gradient(to right, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  padding: 8px 0;
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to right, #FFD700, #FFA500);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
 
 .nav-link:hover {
-  color: var(--color-primary);
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.5),
+               0 0 40px rgba(255, 215, 0, 0.3);
+}
+
+.nav-link:hover::after {
+  width: 100%;
 }
 
 .nav-toggle {
@@ -726,9 +827,14 @@ select.form-control {
 .nav-toggle span {
   width: 24px;
   height: 2px;
-  background-color: var(--color-text);
+  background: linear-gradient(to right, #FFD700, #FFA500);
   margin: 2px 0;
-  transition: all var(--duration-fast) var(--ease-standard);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-toggle:hover span {
+  background: linear-gradient(to right, #FFA500, #FFD700);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
 
 /* Hero Section */
@@ -746,8 +852,45 @@ select.form-control {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, #2C3E50, #3498DB);
+  background: linear-gradient(170deg, #000000, #1a1a1a);
   z-index: -1;
+  overflow: hidden;
+}
+
+.hero-background::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  background: radial-gradient(circle at center, rgba(255, 215, 0, 0.15) 0%, transparent 70%),
+              radial-gradient(circle at 30% 70%, rgba(255, 215, 0, 0.1) 0%, transparent 50%);
+  animation: rotateGlow 20s linear infinite;
+  opacity: 0.5;
+}
+
+@keyframes rotateGlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.hero-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, var(--accent-glow), transparent 70%);
+  opacity: 0.5;
+  animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+  100% { opacity: 0.3; }
 }
 
 .hero-content {
@@ -757,21 +900,54 @@ select.form-control {
 }
 
 .hero-title {
-  font-size: 48px;
-  font-weight: var(--font-weight-bold);
+  font-family: 'SF Pro Display', sans-serif;
+  font-size: 56px;
+  font-weight: 700;
   margin-bottom: var(--space-24);
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
+  background: linear-gradient(to right, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 40px rgba(255, 215, 0, 0.6),
+               0 0 80px rgba(255, 215, 0, 0.4),
+               0 0 120px rgba(255, 215, 0, 0.2);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease-out forwards, glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0% { text-shadow: 0 0 30px rgba(255, 215, 0, 0.3); }
+  50% { text-shadow: 0 0 40px rgba(255, 215, 0, 0.6); }
+  100% { text-shadow: 0 0 30px rgba(255, 215, 0, 0.3); }
 }
 
 .hero-subtitle {
-  font-size: 24px;
+  font-family: 'SF Pro Display', sans-serif;
+  font-size: 28px;
   margin-bottom: var(--space-32);
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
-  line-height: var(--line-height-normal);
+  line-height: 1.4;
+  color: #e2e2e2;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease-out 0.3s forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .hero-buttons {
@@ -782,16 +958,63 @@ select.form-control {
 /* Section Styles */
 .section {
   padding: 80px 0;
+  position: relative;
+  background: linear-gradient(170deg, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.98));
+  color: #ffffff;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(255, 215, 0, 0.08) 0%, transparent 50%),
+              radial-gradient(circle at 70% 80%, rgba(255, 215, 0, 0.08) 0%, transparent 50%);
+  pointer-events: none;
 }
 
 .section--alt {
-  background-color: var(--color-secondary);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.95));
+  position: relative;
+  overflow: hidden;
+}
+
+.section--alt::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
 }
 
 .section-title {
   text-align: center;
   margin-bottom: var(--space-16);
   font-size: var(--font-size-3xl);
+  font-family: 'SF Pro Display', sans-serif;
+  background: linear-gradient(to right, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0 20px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #FFD700, transparent);
 }
 
 .section-subtitle {
@@ -830,14 +1053,42 @@ select.form-control {
   text-align: center;
   padding: var(--space-20);
   border-radius: var(--radius-lg);
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 215, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+}
+
+.stat-item h3 {
+  color: #FFD700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+  font-family: 'SF Pro Display', sans-serif;
+}
+
+.stat-item p {
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .stat-item h3 {
   font-size: var(--font-size-3xl);
-  color: var(--color-primary);
+  background: linear-gradient(to right, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: var(--space-8);
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
 }
 
 .stat-item p {
@@ -875,9 +1126,14 @@ select.form-control {
 }
 
 .course-title {
-  color: var(--color-primary);
+  background: linear-gradient(to right, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: var(--space-12);
   font-size: var(--font-size-xl);
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+  font-family: 'SF Pro Display', sans-serif;
 }
 
 .course-duration {
@@ -912,11 +1168,31 @@ select.form-control {
 }
 
 .course-topics li::before {
-  content: '✓';
+  content: '✦';
   position: absolute;
   left: 0;
-  color: var(--color-success);
+  color: #FFD700;
   font-weight: var(--font-weight-bold);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.course-description {
+  color: rgba(255, 255, 255, 0.9);
+  font-family: 'SF Pro Display', sans-serif;
+}
+
+.course-pricing {
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.price-usd {
+  color: #FFD700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.price-aed {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .course-pricing {
@@ -957,8 +1233,13 @@ select.form-control {
 }
 
 .service-card h3 {
-  color: var(--color-primary);
+  background: linear-gradient(to right, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: var(--space-16);
+  font-family: 'SF Pro Display', sans-serif;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
 }
 
 .service-card ul {
@@ -977,8 +1258,12 @@ select.form-control {
   content: '•';
   position: absolute;
   left: 0;
-  color: var(--color-primary);
+  background: linear-gradient(to right, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   font-weight: var(--font-weight-bold);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
 
 /* Contact Section */
@@ -990,10 +1275,42 @@ select.form-control {
 }
 
 .contact-form-container {
-  background-color: var(--color-surface);
+  background: rgba(0, 0, 0, 0.7);
   padding: var(--space-32);
   border-radius: var(--radius-lg);
-  border: 1px solid var(--color-border);
+  border: 1px solid rgba(255, 215, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-form-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+}
+
+.form-control {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  color: #ffffff;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.form-control:focus {
+  border-color: #FFD700;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+}
+
+.form-label {
+  color: #FFD700;
 }
 
 .contact-info {
@@ -1006,7 +1323,12 @@ select.form-control {
 
 .contact-item h4 {
   margin-bottom: var(--space-8);
-  color: var(--color-primary);
+  background: linear-gradient(to right, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'SF Pro Display', sans-serif;
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
 }
 
 .contact-item p {
@@ -1016,9 +1338,55 @@ select.form-control {
 
 /* Footer */
 .footer {
-  background-color: var(--color-text);
+  background: linear-gradient(180deg, #000000, #0a0a0a);
   color: var(--color-surface);
   padding: var(--space-32) 0 var(--space-16) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #FFD700, transparent);
+  opacity: 0.3;
+}
+
+.footer-section h3 {
+  background: linear-gradient(to right, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'SF Pro Display', sans-serif;
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.footer-section p {
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.contact-info-footer {
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.footer-description {
+  color: #ffffff;
+  font-family: 'SF Pro Display', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  opacity: 0.9;
+  max-width: 500px;
 }
 
 .footer-content {
@@ -1045,13 +1413,29 @@ select.form-control {
 }
 
 .footer-section a {
-  color: #000000;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: 'SF Pro Display', sans-serif;
   font-weight: 500;
-  transition: color var(--duration-fast) var(--ease-standard);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
 }
 
 .footer-section a:hover {
-  color: #333333;
+  color: #FFD700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.footer-section h4 {
+  color: #FFD700;
+  font-family: 'SF Pro Display', sans-serif;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.footer-bottom {
+  position: relative;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .footer-bottom {
@@ -1116,11 +1500,35 @@ select.form-control {
     top: 100%;
     left: 0;
     right: 0;
-    background-color: var(--color-surface);
-    border-top: 1px solid var(--color-border);
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-top: 1px solid rgba(255, 215, 0, 0.1);
     flex-direction: column;
     padding: var(--space-16);
     gap: var(--space-16);
+    animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .nav-menu::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
   }
   
   .nav-menu.active {
